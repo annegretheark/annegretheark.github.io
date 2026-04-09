@@ -3,333 +3,457 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Anne Grethe Knutsen | Azure Arkitekt</title>
+  <title>Azure-plattform og løsningsdesign</title>
   <style>
     :root {
-      --bg: #f3f7fb;
-      --card: #ffffff;
-      --text: #1f2937;
-      --muted: #5b6472;
-      --primary: #0f172a;
-      --accent: #1d4ed8;
-      --accent-2: #2563eb;
-      --border: #dbe4f0;
-      --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
-      --radius: 18px;
-      --max: 1100px;
+      --bg: #0b1220;
+      --bg-soft: #111a2e;
+      --card: rgba(255,255,255,0.08);
+      --line: rgba(255,255,255,0.12);
+      --text: #eaf1ff;
+      --muted: #b7c3df;
+      --accent: #66b3ff;
+      --accent-2: #6ee7b7;
+      --shadow: 0 20px 50px rgba(0,0,0,0.35);
+      --radius: 22px;
+      --max: 1180px;
     }
 
     * { box-sizing: border-box; }
 
+    html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(180deg, #eef4fb 0%, #f8fbfe 100%);
+      font-family: Arial, Helvetica, sans-serif;
       color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(102,179,255,0.18), transparent 28%),
+        radial-gradient(circle at top right, rgba(110,231,183,0.12), transparent 20%),
+        linear-gradient(180deg, #08101d 0%, #0b1220 100%);
       line-height: 1.6;
     }
 
-    a {
-      color: var(--accent);
-      text-decoration: none;
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
     }
 
-    a:hover {
-      text-decoration: underline;
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(14px);
+      background: rgba(8, 16, 29, 0.72);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 14px 0;
+    }
+
+    .brand {
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-size: 0.95rem;
+      color: var(--muted);
     }
 
     .hero {
-      background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 100%);
-      color: white;
-      padding: 72px 20px 56px;
-    }
-
-    .hero-inner,
-    .section-inner,
-    .footer-inner {
-      max-width: var(--max);
-      margin: 0 auto;
+      padding: 72px 0 36px;
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
+      grid-template-columns: 1.1fr 0.9fr;
       gap: 28px;
       align-items: center;
     }
 
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      color: var(--accent-2);
+      font-size: 0.9rem;
+      margin-bottom: 18px;
+    }
+
+    h1, h2, h3 { margin: 0 0 14px; line-height: 1.15; }
+
     h1 {
-      font-size: clamp(2rem, 5vw, 3.4rem);
-      line-height: 1.1;
-      margin: 0 0 16px;
+      font-size: clamp(2.1rem, 4vw, 4.2rem);
+      letter-spacing: -0.02em;
     }
 
     .lead {
       font-size: 1.08rem;
-      max-width: 680px;
-      margin: 0 0 24px;
-      color: rgba(255,255,255,0.92);
+      color: var(--muted);
+      max-width: 62ch;
+      margin-bottom: 24px;
     }
 
-    .button-row {
+    .cta-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 14px;
+      margin-top: 8px;
     }
 
-    .button {
-      display: inline-block;
-      padding: 12px 18px;
-      border-radius: 999px;
-      font-weight: bold;
-      border: 1px solid rgba(255,255,255,0.3);
-      transition: 0.2s ease;
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 18px;
+      border-radius: 14px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      transition: transform 0.2s ease, opacity 0.2s ease, border-color 0.2s ease;
     }
 
-    .button.primary {
-      background: white;
-      color: var(--primary);
-      border-color: white;
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #4f8fff);
+      color: #07101f;
+      box-shadow: var(--shadow);
     }
 
-    .button.secondary {
-      color: white;
-      background: rgba(255,255,255,0.08);
+    .btn-secondary {
+      border-color: var(--line);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
     }
 
-    .button:hover {
-      transform: translateY(-1px);
-      text-decoration: none;
+    .hero-card,
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
     }
 
     .hero-card {
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.16);
-      border-radius: 22px;
-      padding: 22px;
-      backdrop-filter: blur(8px);
+      overflow: hidden;
     }
 
-    .hero-card h2 {
-      margin-top: 0;
-      font-size: 1.1rem;
+    .hero-card img {
+      width: 100%;
+      height: 100%;
+      min-height: 320px;
+      object-fit: cover;
+      display: block;
+      background: #0f1728;
     }
 
-    .hero-card ul {
-      margin: 0;
-      padding-left: 18px;
+    section {
+      padding: 36px 0;
     }
 
-    .section {
-      padding: 34px 20px;
+    .section-title {
+      font-size: clamp(1.6rem, 2.5vw, 2.3rem);
+      margin-bottom: 10px;
+    }
+
+    .section-intro {
+      color: var(--muted);
+      max-width: 72ch;
+      margin-bottom: 24px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
     }
 
     .grid-2 {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
     }
 
     .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 26px;
-      box-shadow: var(--shadow);
+      padding: 22px;
     }
 
-    .card h2,
     .card h3 {
-      margin-top: 0;
-      color: var(--accent);
-    }
-
-    .muted {
-      color: var(--muted);
-    }
-
-    .skills {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-      padding: 0;
-      margin: 0;
-      list-style: none;
-    }
-
-    .skills li {
-      background: #f7faff;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 12px 14px;
-      font-weight: bold;
-    }
-
-    .case-image {
-      width: 100%;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      margin: 14px 0 18px;
-      display: block;
-      background: #fff;
-    }
-
-    .case-points {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 18px;
-    }
-
-    .case-point {
-      background: #f8fbff;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 14px;
-    }
-
-    .case-point strong {
-      display: block;
-      margin-bottom: 6px;
-      color: var(--primary);
-    }
-
-    .contact-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .contact-list li {
+      font-size: 1.1rem;
       margin-bottom: 10px;
     }
 
-    footer {
-      padding: 24px 20px 40px;
+    .card p,
+    .card li {
       color: var(--muted);
     }
 
-    @media (max-width: 860px) {
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .highlight {
+      color: var(--accent-2);
+      font-weight: 700;
+    }
+
+    .image-panel {
+      overflow: hidden;
+      padding: 0;
+    }
+
+    .image-panel img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 340px;
+      object-fit: cover;
+      background: #0f1728;
+    }
+
+    .process-step {
+      position: relative;
+      padding-left: 22px;
+    }
+
+    .process-step::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      position: absolute;
+      left: 0;
+      top: 9px;
+      box-shadow: 0 0 0 6px rgba(102,179,255,0.12);
+    }
+
+    .contact-box {
+      text-align: center;
+      padding: 34px 24px;
+      margin-top: 10px;
+    }
+
+    footer {
+      padding: 28px 0 48px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 960px) {
       .hero-grid,
-      .grid-2,
-      .case-points {
+      .grid-3,
+      .grid-2 {
         grid-template-columns: 1fr;
       }
 
-      .skills {
-        grid-template-columns: 1fr;
+      .hero {
+        padding-top: 44px;
+      }
+
+      .nav-inner {
+        align-items: flex-start;
+        flex-direction: column;
       }
     }
   </style>
 </head>
 <body>
-  <header class="hero">
-    <div class="hero-inner hero-grid">
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="#top" class="brand">Azure-plattform • Løsningsdesign</a>
+      <div class="nav-links">
+        <a href="#oversikt">Oversikt</a>
+        <a href="#arkitektur">Arkitektur</a>
+        <a href="#metode">Metode</a>
+        <a href="#sikkerhet">Sikkerhet</a>
+        <a href="#kontakt">Kontakt</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="container hero-grid">
       <div>
-        <h1>Anne Grethe Knutsen</h1>
+        <div class="eyebrow">Azure CAF • WAF • Governance • Automatisering</div>
+        <h1>Skalerbar hostingplattform i Azure, bygget for kontroll, fart og trygg drift</h1>
         <p class="lead">
-          Erfaren IT-konsulent og Azure-arkitekt med fokus på sikre, skalerbare skyløsninger,
-          governance, DevOps og plattformdesign som gir verdi over tid.
+          Et eksempel på hvordan en moderne Azure-plattform kan designes med tydelig separasjon mellom
+          plattform og applikasjoner, sterk styring, standardisering og automatisert leveranse. Dette er laget
+          som en enkel og tydelig landingsside som viser kompetanse og arkitekturtankegang.
         </p>
-        <div class="button-row">
-          <a class="button primary" href="#case">Se løsningscase</a>
-          <a class="button secondary" href="https://www.linkedin.com/in/anne-grethe-knutsen" target="_blank">LinkedIn</a>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#arkitektur">Se arkitekturen</a>
+          <a class="btn btn-secondary" href="#kontakt">Ta kontakt</a>
         </div>
       </div>
-      <aside class="hero-card">
-        <h2>Fokusområder</h2>
-        <ul>
-          <li>Azure landing zones og governance</li>
-          <li>Terraform og Infrastructure as Code</li>
-          <li>Azure DevOps og CI/CD</li>
-          <li>Sikkerhet, nettverk og kostnadskontroll</li>
-        </ul>
-      </aside>
+
+      <div class="hero-card">
+        <img src="bilder/azure-arkitektur.png" alt="Illustrasjon av Azure hostingplattform" />
+      </div>
     </div>
   </header>
 
-  <main>
-    <section class="section">
-      <div class="section-inner grid-2">
-        <article class="card">
-          <h2>Om meg</h2>
-          <p>
-            Jeg designer og implementerer sikre og skalerbare skyløsninger der strategi,
-            teknologi og mennesker spiller på lag. Jeg er særlig opptatt av å bygge plattformer
-            som er robuste nok for drift, enkle nok å forvalte, og standardiserte nok til å skalere.
-          </p>
-        </article>
+  <section id="oversikt">
+    <div class="container">
+      <h2 class="section-title">Hva denne siden viser</h2>
+      <p class="section-intro">
+        Siden er laget for å gi et raskt og profesjonelt overblikk over et løsningsforslag for en Azure-basert
+        hostingplattform. Den passer fint som porteføljeside, landingsside eller eksempel på hvordan du tenker
+        rundt plattform, sikkerhet og drift.
+      </p>
 
-        <article class="card">
-          <h2>Kompetanse</h2>
-          <ul class="skills">
-            <li>Azure arkitektur</li>
-            <li>Landing zones</li>
-            <li>Terraform</li>
-            <li>Azure DevOps</li>
-            <li>Governance</li>
-            <li>Zero Trust</li>
-            <li>Hybrid infrastruktur</li>
-            <li>Plattformdesign</li>
+      <div class="grid-3">
+        <div class="card">
+          <h3>1. Tydelig plattformmodell</h3>
+          <p>Bygget med <span class="highlight">separasjon av ansvar</span> mellom plattformteam og applikasjonsteam for bedre kontroll og enklere skalering.</p>
+        </div>
+        <div class="card">
+          <h3>2. Styring fra start</h3>
+          <p>Governance, policyer, nettverk, identitet og sikkerhet er tenkt inn tidlig, ikke lagt oppå i etterkant.</p>
+        </div>
+        <div class="card">
+          <h3>3. Drift som tåler vekst</h3>
+          <p>Automatisering, standardisering og overvåkning gjør plattformen mer robust og mindre personavhengig.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="arkitektur">
+    <div class="container">
+      <h2 class="section-title">Arkitektur og prinsipper</h2>
+      <p class="section-intro">
+        Eksempelet under viser hvordan man kan etablere et sikkert og effektivt plattformfundament i Azure med
+        utgangspunkt i CAF og WAF, samtidig som applikasjonsteam får frihet innenfor tydelige rammer.
+      </p>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>Plattformlaget</h3>
+          <ul>
+            <li>Landing zones med felles mønstre og guardrails</li>
+            <li>Sentral nettverksarkitektur og identitetsstyring</li>
+            <li>Azure Policy og compliance-kontroll</li>
+            <li>Felles logging, overvåkning og sikkerhetskapabiliteter</li>
           </ul>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" id="case">
-      <div class="section-inner">
-        <article class="card">
-          <h2>Eksempel på løsning</h2>
-          <h3>Azure Landing Zone med tydelig separasjon mellom plattform og applikasjoner</h3>
-          <p class="muted">
-            Dette eksempelet viser hvordan en Azure-plattform kan bygges med standardiserte
-            plattformtjenester for governance, sikkerhet, nettverk, kostnadskontroll og DevOps,
-            samtidig som applikasjonene kan utvikles og driftes mer selvstendig.
-          </p>
-
-          <img class="case-image" src="an_infographic_style_digital_illustration_depicts.png" alt="Azure landing zone med plattform, governance, sikkerhet, DevOps og applikasjoner" />
-
-          <div class="case-points">
-            <div class="case-point">
-              <strong>Problem</strong>
-              Mange miljøer blir unødig komplekse med for mange nivåer, for mange unntak og lite tydelig ansvar.
-            </div>
-            <div class="case-point">
-              <strong>Løsning</strong>
-              En standardisert plattform med policy, nettverk, sikkerhet, overvåkning og DevOps som felles fundament.
-            </div>
-            <div class="case-point">
-              <strong>Effekt</strong>
-              Lavere kompleksitet, bedre kontroll, enklere forvaltning og et bedre grunnlag for skalerbar drift.
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-inner grid-2">
-        <article class="card">
-          <h2>Hvordan jeg jobber</h2>
-          <p>
-            Jeg kombinerer arkitektur, governance og praktisk gjennomføring. Målet er ikke bare å tegne en løsning,
-            men å sikre at den faktisk kan bygges, driftes og videreutvikles på en trygg og kostnadseffektiv måte.
-          </p>
-        </article>
-
-        <article class="card">
-          <h2>Kontakt</h2>
-          <ul class="contact-list">
-            <li><strong>E-post:</strong> <a href="mailto:greknuts@online.no">greknuts@online.no</a></li>
-            <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/anne-grethe-knutsen" target="_blank">anne-grethe-knutsen</a></li>
+        </div>
+        <div class="card">
+          <h3>Applikasjonslaget</h3>
+          <ul>
+            <li>Team utvikler og drifter egne tjenester innenfor standarder</li>
+            <li>CI/CD med sporbarhet og forutsigbar leveranse</li>
+            <li>Infrastruktur som kode for repeterbar utrulling</li>
+            <li>Skalerbar modell for nåværende og fremtidige tjenester</li>
           </ul>
-        </article>
+        </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
+
+  <section>
+    <div class="container grid-2">
+      <div class="card image-panel">
+        <img src="bilder/governance-oversikt.png" alt="Illustrasjon av governance og ansvar" />
+      </div>
+      <div class="card">
+        <h3>Hvorfor dette fungerer</h3>
+        <p>
+          Når plattformen standardiseres, blir det lettere å bygge sikkert, raskt og likt. Det gir bedre økonomisk kontroll,
+          færre spesialløsninger og mindre risiko for at drift blir avhengig av enkeltpersoner.
+        </p>
+        <p>
+          Målet er ikke mest mulig kompleksitet. Målet er en modell som er <span class="highlight">enkel nok til å driftes</span>,
+          men sterk nok til å støtte virksomhetskritiske tjenester over tid.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="metode">
+    <div class="container">
+      <h2 class="section-title">Metodisk tilnærming</h2>
+      <p class="section-intro">
+        God arkitektur starter ikke i portalen. Den starter i behov, ansvar og valg av standarder.
+      </p>
+
+      <div class="grid-2">
+        <div class="card process-step">
+          <h3>Behov og prinsipper</h3>
+          <p>Kartlegg behov, kritikalitet, avhengigheter og ønsket modenhet. Bli enige om prinsipper før bygging starter.</p>
+        </div>
+        <div class="card process-step">
+          <h3>Målarkitektur</h3>
+          <p>Definer ønsket målarkitektur med tydelig ansvar, sikkerhetsmodell, nettverk, policyer og driftsmodell.</p>
+        </div>
+        <div class="card process-step">
+          <h3>Automatisering</h3>
+          <p>Bygg plattformkapabiliteter med IaC og CI/CD slik at miljøer kan etableres likt hver gang.</p>
+        </div>
+        <div class="card process-step">
+          <h3>Kontinuerlig forbedring</h3>
+          <p>Bruk måling, logging, kostnadsoppfølging og erfaringer fra drift til å forbedre plattformen fortløpende.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sikkerhet">
+    <div class="container">
+      <h2 class="section-title">Sikkerhet og overvåkning</h2>
+      <p class="section-intro">
+        En god plattform gjør sikkerhet til en innebygget egenskap, ikke et ekstra prosjekt som kommer senere.
+      </p>
+
+      <div class="grid-3">
+        <div class="card">
+          <h3>Identitet og tilgang</h3>
+          <p>Minste privilegium, rollebasert tilgang og tydelige administrative grenser reduserer angrepsflaten.</p>
+        </div>
+        <div class="card">
+          <h3>Synlighet</h3>
+          <p>Felles logging og overvåkning gjør det mulig å oppdage avvik tidlig og reagere raskere.</p>
+        </div>
+        <div class="card">
+          <h3>Etterlevelse</h3>
+          <p>Policyer og standarder gir bedre kontroll på krav, konfigurasjon og endringer over tid.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontakt">
+    <div class="container">
+      <div class="card contact-box">
+        <h2 class="section-title">Vil du bruke dette som porteføljeside?</h2>
+        <p class="section-intro" style="margin: 0 auto 18px;">
+          Bytt ut teksten her med navn, kort profil og kontaktinformasjon. Du kan også legge til lenke til LinkedIn,
+          GitHub eller konkrete case-eksempler.
+        </p>
+        <a class="btn btn-primary" href="mailto:din.epost@eksempel.no">Kontakt meg</a>
+      </div>
+    </div>
+  </section>
 
   <footer>
-    <div class="footer-inner">© 2026 Anne Grethe Knutsen</div>
+    <div class="container">
+      Denne siden ligger fint som én fil i <strong>index.html</strong>. Bildene legges i en mappe som heter <strong>bilder</strong>.
+    </div>
   </footer>
 </body>
 </html>
