@@ -2,175 +2,521 @@
 <html lang="no">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Anne Grethe Knutsen | Azure Arkitekt</title>
-
   <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       font-family: Arial, sans-serif;
-      background:#f8fafc;
-      color:#1f2937;
+      line-height: 1.6;
+      color: #1f2937;
+      background: #f8fafc;
     }
 
     header {
-      background: linear-gradient(135deg,#0f172a,#1e3a8a);
-      padding:15px;
-      position:sticky;
-      top:0;
+      background: linear-gradient(135deg, #0f172a, #1e3a8a);
+      color: white;
+      padding: 18px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
     }
 
     nav {
-      display:flex;
-      flex-wrap:wrap;
-      justify-content:center;
-      gap:10px;
+      max-width: 1250px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      padding: 0 20px;
     }
 
     nav a {
-      color:white;
-      text-decoration:none;
-      font-weight:bold;
-      padding:8px 12px;
-      border-radius:6px;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 10px 14px;
+      border-radius: 8px;
+      transition: background 0.2s ease;
+      font-size: 0.95rem;
     }
 
     nav a:hover {
-      background:rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.14);
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #dbeafe, #eff6ff);
+      padding: 80px 20px 55px;
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 1050px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      margin-bottom: 16px;
+      color: #0f172a;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      max-width: 900px;
+      margin: 0 auto 18px;
+      color: #334155;
+    }
+
+    .hero .subtext {
+      max-width: 920px;
+      margin: 0 auto 28px;
+      color: #475569;
+      font-size: 1.02rem;
+    }
+
+    .hero-links a {
+      display: inline-block;
+      margin: 8px;
+      padding: 12px 18px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .btn-primary {
+      background: #2563eb;
+      color: white;
+    }
+
+    .btn-secondary {
+      background: white;
+      color: #1e3a8a;
+      border: 1px solid #cbd5e1;
     }
 
     section {
-      max-width:1100px;
-      margin:auto;
-      padding:60px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 65px 20px;
     }
 
-    h2 {
-      text-align:center;
-      margin-bottom:20px;
+    section h2 {
+      font-size: 2rem;
+      margin-bottom: 14px;
+      color: #0f172a;
+      text-align: center;
     }
 
-    .content {
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:30px;
-      align-items:center;
+    section .intro {
+      max-width: 860px;
+      margin: 0 auto 40px;
+      text-align: center;
+      color: #475569;
+      font-size: 1.05rem;
     }
 
-    .content img {
-      width:100%;
-      border-radius:12px;
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      align-items: center;
     }
 
-    .box {
-      background:white;
-      padding:20px;
-      border-radius:12px;
+    .content-grid.reverse {
+      direction: rtl;
     }
 
-    @media(max-width:900px){
-      .content {
-        grid-template-columns:1fr;
+    .content-grid.reverse > * {
+      direction: ltr;
+    }
+
+    .text-card {
+      background: white;
+      padding: 28px;
+      border-radius: 18px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    }
+
+    .text-card h3 {
+      font-size: 1.45rem;
+      margin-bottom: 12px;
+      color: #1d4ed8;
+    }
+
+    .text-card p {
+      margin-bottom: 12px;
+      color: #334155;
+    }
+
+    .example-box {
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 12px;
+      background: #eff6ff;
+      border-left: 4px solid #2563eb;
+    }
+
+    .example-box strong {
+      display: block;
+      margin-bottom: 8px;
+      color: #1e3a8a;
+    }
+
+    .image-card img {
+      width: 100%;
+      border-radius: 18px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+      display: block;
+    }
+
+    .cert-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+      margin-top: 30px;
+    }
+
+    .cert-item {
+      background: white;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(15,23,42,0.08);
+      font-weight: 600;
+      color: #1f2937;
+    }
+
+    footer {
+      background: #0f172a;
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+      margin-top: 40px;
+    }
+
+    footer a {
+      color: #93c5fd;
+      text-decoration: none;
+    }
+
+    @media (max-width: 900px) {
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      nav a {
+        font-size: 0.9rem;
+        padding: 8px 10px;
       }
     }
   </style>
 </head>
-
 <body>
 
-<header>
-  <nav>
-    <a href="#landing">Landing Zones</a>
-    <a href="#terraform">Terraform</a>
-    <a href="#devops">DevOps</a>
-    <a href="#governance">Governance</a>
-    <a href="#sikkerhet">Sikkerhet</a>
-    <a href="#hybrid">Hybrid</a>
-    <a href="#caf">CAF</a>
-    <a href="#waf">WAF</a>
-  </nav>
-</header>
+  <header>
+    <nav>
+      <a href="#landingzones">Azure Landing Zones</a>
+      <a href="#terraform">Terraform og IaC</a>
+      <a href="#devops">Azure DevOps</a>
+      <a href="#governance">Governance</a>
+      <a href="#sikkerhet">Sikkerhet</a>
+      <a href="#hybrid">Hybrid drift</a>
+      <a href="#caf">CAF</a>
+      <a href="#waf">WAF</a>
+      <a href="#sertifiseringer">Sertifiseringer</a>
+    </nav>
+  </header>
 
-<section id="landing">
-  <h2>Azure Landing Zones</h2>
-  <div class="content">
-    <div class="box">
-      Plattform for struktur, kontroll og skalerbarhet i Azure.
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Anne Grethe Knutsen</h1>
+      <p>
+        Erfaren IT-arkitekt med spisskompetanse innen Azure, Enterprise Landing Zones,
+        Terraform, Azure DevOps, governance, sikkerhet, hybrid drift, Cloud Adoption Framework
+        og Well-Architected Framework.
+      </p>
+      <p class="subtext">
+        Jeg designer og implementerer sikre, skalerbare og driftseffektive skyløsninger
+        som gir virksomheter bedre kontroll, raskere leveranser og et robust fundament for videre vekst.
+      </p>
+      <div class="hero-links">
+        <a class="btn-primary" href="mailto:greknuts@online.no">greknuts@online.no</a>
+        <a class="btn-secondary" href="https://www.linkedin.com/in/anne-grethe-knutsen/" target="_blank">
+          LinkedIn-profil
+        </a>
+      </div>
     </div>
-    <img src="bilder/azure-landing-zones.jpg">
-  </div>
-</section>
+  </section>
 
-<section id="terraform">
-  <h2>Terraform og IaC</h2>
-  <div class="content">
-    <img src="bilder/terraform-iac.jpg">
-    <div class="box">
-      Infrastruktur som kode gir kontroll, fart og kvalitet.
+  <section id="landingzones">
+    <h2>Azure Landing Zones</h2>
+    <p class="intro">
+      Et godt fundament i Azure gjør det enklere å bygge sikkert, standardisert og skalerbart.
+    </p>
+    <div class="content-grid">
+      <div class="text-card">
+        <h3>Struktur fra start</h3>
+        <p>
+          Azure Landing Zones gir en gjennomtenkt struktur for abonnementer, nettverk,
+          identitet, sikkerhet, policyer og styring. Det gjør at virksomheten kan vokse
+          uten at plattformen blir uoversiktlig.
+        </p>
+        <p>
+          Jeg jobber med å etablere plattformsoner som gir tydelig ansvarsdeling mellom
+          plattformteam og applikasjonsteam, samtidig som sikkerhet og governance er bygget inn fra starten.
+        </p>
+        <div class="example-box">
+          <strong>Eksempel:</strong>
+          Et oppsett med egne management groups, policyer, hub-spoke nettverk og standardiserte abonnementer
+          for produksjon, test og utvikling gir bedre kontroll og enklere forvaltning over tid.
+        </div>
+      </div>
+      <div class="image-card">
+        <img src="bilder/azure-landing-zones.jpg" alt="Azure Landing Zones" />
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="devops">
-  <h2>Azure DevOps</h2>
-  <div class="content">
-    <div class="box">
-      Automatiserte pipelines for trygg deploy.
+  <section id="terraform">
+    <h2>Terraform og IaC</h2>
+    <p class="intro">
+      Infrastruktur som kode gir repeterbarhet, sporbarhet og færre manuelle feil.
+    </p>
+    <div class="content-grid reverse">
+      <div class="text-card">
+        <h3>Automatiser infrastrukturen</h3>
+        <p>
+          Med Terraform kan infrastruktur bygges og forvaltes på en konsistent og kontrollert måte.
+          Det gjør det enklere å standardisere miljøer, redusere feil og jobbe mer effektivt.
+        </p>
+        <p>
+          Jeg bruker Terraform til å etablere Azure-miljøer med tydelig struktur, gjenbrukbare moduler
+          og god kontroll på endringer gjennom versjonering og pipelines.
+        </p>
+        <div class="example-box">
+          <strong>Eksempel:</strong>
+          Opprette resource groups, nettverk, Key Vault, monitorering og policy-tilknytning automatisk
+          gjennom kode, slik at nye miljøer kan etableres raskt og likt hver gang.
+        </div>
+      </div>
+      <div class="image-card">
+        <img src="bilder/terraform-iac.jpg" alt="Terraform og IaC" />
+      </div>
     </div>
-    <img src="bilder/azure-devops.jpg">
-  </div>
-</section>
+  </section>
 
-<section id="governance">
-  <h2>Governance</h2>
-  <div class="content">
-    <img src="bilder/governance.jpg">
-    <div class="box">
-      Kontroll på kost, sikkerhet og struktur.
+  <section id="devops">
+    <h2>Azure DevOps</h2>
+    <p class="intro">
+      Gode pipelines gir tryggere leveranser, bedre kvalitet og raskere utvikling.
+    </p>
+    <div class="content-grid">
+      <div class="text-card">
+        <h3>Fra kode til produksjon</h3>
+        <p>
+          Azure DevOps støtter hele leveranseprosessen, fra planlegging og versjonskontroll
+          til bygg, deploy og forvaltning. Det gir bedre flyt og mer forutsigbare leveranser.
+        </p>
+        <p>
+          Jeg bruker pipelines til å automatisere både infrastruktur og applikasjoner,
+          slik at endringer kan valideres og rulles ut på en kontrollert måte.
+        </p>
+        <div class="example-box">
+          <strong>Eksempel:</strong>
+          En pipeline kan først validere Terraform-kode, deretter kjøre plan, få godkjenning
+          og så deploye endringer til test eller produksjon med full sporbarhet.
+        </div>
+      </div>
+      <div class="image-card">
+        <img src="bilder/azure-devops.jpg" alt="Azure DevOps" />
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="sikkerhet">
-  <h2>Sikkerhet</h2>
-  <div class="content">
-    <div class="box">
-      Zero Trust og sikker arkitektur fra start.
+  <section id="governance">
+    <h2>Governance</h2>
+    <p class="intro">
+      Governance gir kontroll på kostnader, sikkerhet, ansvar og etterlevelse.
+    </p>
+    <div class="content-grid reverse">
+      <div class="text-card">
+        <h3>Kontroll uten å stoppe fremdrift</h3>
+        <p>
+          Governance handler om å finne balansen mellom styring og fleksibilitet.
+          Med tydelige prinsipper, policyer og ansvar blir det enklere å bygge sikkert og effektivt.
+        </p>
+        <p>
+          Jeg jobber med strukturer som støtter standardisering, kostnadskontroll, sikkerhet
+          og tydelig rollefordeling mellom teamene.
+        </p>
+        <div class="example-box">
+          <strong>Eksempel:</strong>
+          Policyer kan brukes til å kreve tagging, begrense hvor ressurser kan opprettes
+          og sikre at kun godkjente tjenester og regioner brukes.
+        </div>
+      </div>
+      <div class="image-card">
+        <img src="bilder/governance.jpg" alt="Governance" />
+      </div>
     </div>
-    <img src="bilder/sikkerhet.jpg">
-  </div>
-</section>
+  </section>
 
-<section id="hybrid">
-  <h2>Hybrid drift</h2>
-  <div class="content">
-    <img src="bilder/hybrid-drift.jpg">
-    <div class="box">
-      Samspill mellom on-prem og sky.
+  <section id="sikkerhet">
+    <h2>Sikkerhet</h2>
+    <p class="intro">
+      Sikkerhet må være innebygd i plattformen og støtte både drift og utvikling.
+    </p>
+    <div class="content-grid">
+      <div class="text-card">
+        <h3>Zero Trust og innebygd sikkerhet</h3>
+        <p>
+          Jeg jobber med sikkerhetsprinsipper som Zero Trust, minst mulige privilegier,
+          segmentering, identitetsstyring og sikker automatisering.
+        </p>
+        <p>
+          Målet er å redusere risiko, øke synlighet og samtidig gjøre det enklere å levere
+          trygge løsninger i praksis.
+        </p>
+        <div class="example-box">
+          <strong>Eksempel:</strong>
+          Bruk av Entra ID, Conditional Access, Key Vault, logging, monitorering og policyer
+          gir bedre kontroll på tilgang, hemmeligheter og hendelser i plattformen.
+        </div>
+      </div>
+      <div class="image-card">
+        <img src="bilder/sikkerhet.jpg" alt="Sikkerhet" />
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="caf">
-  <h2>CAF</h2>
-  <div class="content">
-    <div class="box">
-      Cloud Adoption Framework for strukturert skyreise.
+  <section id="hybrid">
+    <h2>Hybrid drift</h2>
+    <p class="intro">
+      Mange virksomheter trenger løsninger som binder sammen on-prem og sky på en trygg måte.
+    </p>
+    <div class="content-grid reverse">
+      <div class="text-card">
+        <h3>Sky og eksisterende miljøer i samspill</h3>
+        <p>
+          Hybrid drift handler om å få identitet, nettverk, sikkerhet og tjenester til å fungere
+          godt sammen på tvers av lokale miljøer og Azure.
+        </p>
+        <p>
+          Jeg har erfaring med å bygge bro mellom eksisterende infrastruktur og moderne skyplattformer,
+          slik at virksomheten kan modernisere i riktig tempo.
+        </p>
+        <div class="example-box">
+          <strong>Eksempel:</strong>
+          Integrasjon mellom on-prem Active Directory og Entra ID, kombinert med sikre
+          forbindelser til Azure, gir brukerne en mer sømløs og trygg hverdag.
+        </div>
+      </div>
+      <div class="image-card">
+        <img src="bilder/hybrid-drift.jpg" alt="Hybrid drift" />
+      </div>
     </div>
-    <img src="bilder/caf.jpg">
-  </div>
-</section>
+  </section>
 
-<section id="waf">
-  <h2>WAF</h2>
-  <div class="content">
-    <img src="bilder/waf.jpg">
-    <div class="box">
-      Well-Architected Framework for robuste løsninger.
+  <section id="caf">
+    <h2>CAF</h2>
+    <p class="intro">
+      Cloud Adoption Framework gir struktur for hele skyreisen, fra strategi til drift.
+    </p>
+    <div class="content-grid">
+      <div class="text-card">
+        <h3>Cloud Adoption Framework</h3>
+        <p>
+          CAF hjelper virksomheter med å jobbe helhetlig med strategi, organisering,
+          styring, sikkerhet, plattform og migrering. Det gir en tydelig retning for
+          hvordan man lykkes i skyen over tid.
+        </p>
+        <p>
+          Jeg bruker CAF som et praktisk rammeverk for å sikre at tekniske valg henger sammen
+          med virksomhetens behov og mål.
+        </p>
+        <div class="example-box">
+          <strong>Eksempel:</strong>
+          CAF kan brukes som grunnlag når en virksomhet skal planlegge landing zones,
+          definere roller, etablere governance og prioritere hvilke tjenester som skal moderniseres først.
+        </div>
+      </div>
+      <div class="image-card">
+        <img src="bilder/caf.jpg" alt="Cloud Adoption Framework" />
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <section id="waf">
+    <h2>WAF</h2>
+    <p class="intro">
+      Well-Architected Framework bidrar til robuste, sikre og driftbare løsninger i Azure.
+    </p>
+    <div class="content-grid reverse">
+      <div class="text-card">
+        <h3>Well-Architected Framework</h3>
+        <p>
+          WAF brukes for å evaluere og forbedre arkitekturvalg. Det hjelper med å balansere
+          krav til pålitelighet, sikkerhet, kostnadsstyring, drift og ytelse.
+        </p>
+        <p>
+          Jeg bruker Well-Architected Framework til å kvalitetssikre løsninger og til å finne
+          forbedringsområder før små valg blir store problemer.
+        </p>
+        <div class="example-box">
+          <strong>Eksempel:</strong>
+          En løsning kan vurderes opp mot WAF for å se om den har tilstrekkelig redundans,
+          riktig monitorering, kostnadskontroll og god nok sikkerhet før den tas i bruk i produksjon.
+        </div>
+      </div>
+      <div class="image-card">
+        <img src="bilder/waf.jpg" alt="Well-Architected Framework" />
+      </div>
+    </div>
+  </section>
+
+  <section id="sertifiseringer">
+    <h2>Sertifiseringer</h2>
+    <p class="intro">
+      Et utvalg relevante sertifiseringer innen Azure, DevOps, Microsoft 365 og infrastruktur.
+    </p>
+    <div class="cert-list">
+      <div class="cert-item">Microsoft Certified: Azure Solutions Architect Expert</div>
+      <div class="cert-item">Microsoft Certified: DevOps Engineer Expert</div>
+      <div class="cert-item">Microsoft 365 Certified: Administrator Expert</div>
+      <div class="cert-item">HashiCorp Certified: Terraform Associate</div>
+      <div class="cert-item">Microsoft Certified: Azure Administrator Associate</div>
+      <div class="cert-item">Microsoft Certified: Azure Security Engineer Associate</div>
+      <div class="cert-item">Microsoft Certified: Azure Network Engineer Associate</div>
+      <div class="cert-item">Microsoft Certified: Windows Server Hybrid Administrator Associate</div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Anne Grethe Knutsen</p>
+    <p>E-post: <a href="mailto:greknuts@online.no">greknuts@online.no</a></p>
+    <p>
+      LinkedIn:
+      <a href="https://www.linkedin.com/in/anne-grethe-knutsen/" target="_blank">
+        anne-grethe-knutsen
+      </a>
+    </p>
+  </footer>
 
 </body>
 </html>
