@@ -162,6 +162,7 @@
       display: grid;
       grid-template-columns: 1.2fr 1fr;
       gap: 24px;
+      align-items: center;
     }
 
     .grid-3 {
@@ -198,7 +199,8 @@
       margin-bottom: 10px;
     }
 
-    .image-frame img {
+    .image-frame img,
+    .section-image {
       width: 100%;
       display: block;
       border-radius: 14px;
@@ -206,23 +208,9 @@
       box-shadow: var(--shadow);
     }
 
-    .caption {
-      margin-top: 10px;
-      font-size: 14px;
-      color: var(--muted);
-      text-align: center;
-    }
-
     .highlight {
       font-weight: bold;
       color: var(--secondary);
-    }
-
-    .zero-trust-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 1fr;
-      gap: 24px;
-      align-items: start;
     }
 
     .contact-card {
@@ -238,8 +226,7 @@
 
     @media (max-width: 900px) {
       .grid-2,
-      .grid-3,
-      .zero-trust-grid {
+      .grid-3 {
         grid-template-columns: 1fr;
       }
 
@@ -261,7 +248,6 @@
       <a href="#om">Om meg</a>
       <a href="#kompetanse">Kompetanse</a>
       <a href="#eksempler">Eksempler</a>
-      <a href="#bilder">Bilder</a>
       <a href="#zerotrust">Zero Trust</a>
       <a href="#kontakt">Kontakt</a>
     </div>
@@ -282,27 +268,13 @@
   <section id="om">
     <div class="container">
       <div class="card">
-        <h2 class="section-title">Om meg</h2>
-        <p class="section-intro">
-          Jeg er en erfaren IT-arkitekt med fokus på Azure, sikkerhet, plattformdesign og automatisering.
-          Jeg designer og implementerer løsninger som er bygget for drift, kontroll og videre vekst.
-        </p>
-
         <div class="grid-2">
-          <div class="info-box">
-            <h3>Det jeg jobber med</h3>
-            <ul class="clean">
-              <li>Azure Landing Zones</li>
-              <li>Governance og Azure Policy</li>
-              <li>Terraform og Infrastructure as Code</li>
-              <li>Azure DevOps og CI/CD</li>
-              <li>Sikkerhetsarkitektur og Zero Trust</li>
-              <li>Plattformdesign for drift og skalering</li>
-            </ul>
-          </div>
-
-          <div class="info-box">
-            <h3>Hvordan jeg tenker</h3>
+          <div>
+            <h2 class="section-title">Om meg</h2>
+            <p class="section-intro">
+              Jeg er en erfaren IT-arkitekt med fokus på Azure, sikkerhet, plattformdesign og automatisering.
+              Jeg designer og implementerer løsninger som er bygget for drift, kontroll og videre vekst.
+            </p>
             <p>
               Jeg kombinerer strategi, teknologi og praktisk levering. Det betyr tydelige prinsipper,
               strukturert oppbygging og løsninger som faktisk kan driftes over tid.
@@ -310,6 +282,9 @@
             <p class="highlight">
               Målet er ikke bare å bygge noe som virker i dag, men en plattform som tåler morgendagen også.
             </p>
+          </div>
+          <div>
+            <img src="bilder/hostingplattform.jpg" alt="Azure hostingplattform" class="section-image">
           </div>
         </div>
       </div>
@@ -363,7 +338,8 @@
     <div class="container">
       <div class="card">
         <h2 class="section-title">Eksempler på hva jeg leverer</h2>
-        <div class="grid-2">
+
+        <div class="grid-2" style="margin-bottom: 24px;">
           <div class="info-box">
             <h3>Hostingplattform i Azure</h3>
             <ul class="clean">
@@ -373,7 +349,15 @@
               <li>Automatisert etablering med Terraform og Azure DevOps</li>
             </ul>
           </div>
+          <div>
+            <img src="bilder/devops-automatisering.jpg" alt="DevOps og automatisering" class="section-image">
+          </div>
+        </div>
 
+        <div class="grid-2">
+          <div>
+            <img src="bilder/sikkerhet-overvakning.jpg" alt="Sikkerhet og overvåkning" class="section-image">
+          </div>
           <div class="info-box">
             <h3>Drift og forvaltning</h3>
             <ul class="clean">
@@ -388,51 +372,22 @@
     </div>
   </section>
 
-  <section id="bilder">
-    <div class="container">
-      <div class="card">
-        <h2 class="section-title">Bilder</h2>
-        <p class="section-intro">
-          Her er plass til de andre bildene dine. Hvis du allerede har dem i mappen <strong>bilder</strong>,
-          kan du bare bruke de riktige filnavnene.
-        </p>
-
-        <div class="grid-3">
-          <div class="info-box image-frame">
-            <img src="bilder/hostingplattform.jpg" alt="Hostingplattform i Azure">
-            <div class="caption">Bytt til navnet på ditt opprinnelige bilde</div>
-          </div>
-
-          <div class="info-box image-frame">
-            <img src="bilder/devops-automatisering.jpg" alt="DevOps og automatisering">
-            <div class="caption">Bytt til navnet på ditt opprinnelige bilde</div>
-          </div>
-
-          <div class="info-box image-frame">
-            <img src="bilder/sikkerhet-overvakning.jpg" alt="Sikkerhet og overvåkning">
-            <div class="caption">Bytt til navnet på ditt opprinnelige bilde</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section id="zerotrust">
     <div class="container">
       <div class="card">
-        <h2 class="section-title">🔐 Zero Trust i praksis</h2>
-        <p class="section-intro">
-          Moderne sikkerhet handler ikke bare om å beskytte utsiden. I en moderne plattform må tilgang, identitet og kontroll bygges inn fra starten.
-        </p>
+        <div class="grid-2">
+          <div>
+            <h2 class="section-title">🔐 Zero Trust i praksis</h2>
+            <p class="section-intro">
+              Moderne sikkerhet handler ikke bare om å beskytte utsiden. I en moderne plattform må tilgang,
+              identitet og kontroll bygges inn fra starten.
+            </p>
 
-        <div class="zero-trust-grid">
-          <div class="image-frame">
-            <img src="bilder/zerotrust.png" alt="Zero Trust i Azure">
-            <div class="caption">Legg Zero Trust-bildet i mappen <strong>bilder</strong> med navnet <strong>zerotrust.png</strong></div>
-          </div>
+            <p>
+              Jeg designer løsninger basert på <strong>Zero Trust-prinsipper</strong>:
+              aldri stol på noe, verifiser alt.
+            </p>
 
-          <div class="info-box">
-            <h3>Hva det betyr i praksis</h3>
             <ul class="clean">
               <li>Identitet er den nye sikkerhetsperimeteren med Microsoft Entra ID</li>
               <li>Conditional Access styrer tilgang basert på risiko, enhet og lokasjon</li>
@@ -441,7 +396,6 @@
               <li>Logging, innsikt og overvåkning bygges inn som standard</li>
             </ul>
 
-            <h3>Teknisk implementasjon</h3>
             <p>
               Dette kan implementeres gjennom Azure Landing Zones, Azure Policy, Terraform og CI/CD i Azure DevOps,
               slik at sikkerhet, standardisering og skalerbarhet blir en naturlig del av løsningen.
@@ -450,6 +404,10 @@
             <p class="highlight">
               Resultat: En sikker, skalerbar og revisjonsvennlig plattform hvor tilgang styres dynamisk og risiko reduseres kontinuerlig.
             </p>
+          </div>
+
+          <div>
+            <img src="bilder/zerotrust.png" alt="Zero Trust i Azure" class="section-image">
           </div>
         </div>
       </div>
