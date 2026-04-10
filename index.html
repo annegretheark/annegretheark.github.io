@@ -15,10 +15,20 @@
   </script>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      scroll-behavior: smooth;
+      background: #eef3f8;
+      color: #0a2540;
+      line-height: 1.6;
     }
 
     nav {
@@ -26,118 +36,314 @@
       top: 0;
       width: 100%;
       background: #0a2540;
-      padding: 15px;
+      padding: 16px 20px;
       text-align: center;
       z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
     }
 
     nav a {
       color: white;
-      margin: 0 15px;
+      margin: 0 14px;
       text-decoration: none;
       font-weight: bold;
+      font-size: 15px;
     }
 
     nav a:hover {
-      color: #00b4d8;
-    }
-
-    section {
-      padding: 80px 20px;
-      margin-top: 50px;
+      color: #4fc3f7;
     }
 
     .hero {
-      background: linear-gradient(135deg, #0a2540, #1d4e89);
+      background: linear-gradient(135deg, #0a2540, #1d4e89, #4f7ecf);
       color: white;
       text-align: center;
-      padding: 120px 20px;
+      padding: 150px 20px 100px;
+    }
+
+    .hero h1 {
+      font-size: 52px;
+      margin: 0 0 16px;
+    }
+
+    .hero p {
+      font-size: 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    section {
+      padding: 40px 20px;
+      scroll-margin-top: 90px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
     }
 
     .card {
-      background: #f5f7fa;
-      padding: 30px;
+      background: white;
+      padding: 32px;
+      border-radius: 14px;
+      box-shadow: 0 6px 18px rgba(10, 37, 64, 0.08);
+      margin-bottom: 28px;
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 34px;
+      color: #0a2540;
+    }
+
+    h3 {
+      color: #1d4e89;
+      margin-top: 24px;
+    }
+
+    ul {
+      padding-left: 22px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .skill-box {
+      background: #f5f8fc;
+      border-left: 5px solid #1d4e89;
+      padding: 20px;
       border-radius: 10px;
-      max-width: 900px;
-      margin: auto;
+    }
+
+    .skill-box h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+
+    .highlight {
+      font-size: 18px;
+      font-weight: bold;
+      color: #1d4e89;
+    }
+
+    .cta {
+      background: linear-gradient(135deg, #0a2540, #1d4e89);
+      color: white;
+      text-align: center;
+      padding: 50px 20px;
+      border-radius: 14px;
+    }
+
+    .cta h2 {
+      color: white;
+    }
+
+    .zerotrust-image {
+      width: 100%;
+      border-radius: 12px;
+      margin: 20px 0 28px;
+      box-shadow: 0 6px 18px rgba(10, 37, 64, 0.12);
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px 50px;
+      color: #4b5d73;
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 14px 10px;
+      }
+
+      nav a {
+        display: inline-block;
+        margin: 6px 8px;
+        font-size: 14px;
+      }
+
+      .hero {
+        padding: 170px 20px 90px;
+      }
+
+      .hero h1 {
+        font-size: 38px;
+      }
+
+      .hero p {
+        font-size: 20px;
+      }
+
+      h2 {
+        font-size: 28px;
+      }
+
+      .card {
+        padding: 24px;
+      }
     }
   </style>
 </head>
-
 <body>
 
-<!-- MENY -->
-<nav>
-  <a href="#hjem">Hjem</a>
-  <a href="#om">Om meg</a>
-  <a href="#kompetanse">Kompetanse</a>
-  <a href="#zerotrust">Zero Trust</a>
-  <a href="#kontakt">Kontakt</a>
-</nav>
+  <nav>
+    <a href="#hjem">Hjem</a>
+    <a href="#om">Om meg</a>
+    <a href="#kompetanse">Kompetanse</a>
+    <a href="#eksempler">Eksempler</a>
+    <a href="#zerotrust">Zero Trust</a>
+    <a href="#kontakt">Kontakt</a>
+  </nav>
 
-<!-- HERO -->
-<section id="hjem" class="hero">
-  <h1>Azure Arkitekt</h1>
-  <p>Sikre, skalerbare skyløsninger med fokus på governance og automatisering</p>
-</section>
+  <section id="hjem" class="hero">
+    <div class="container">
+      <h1>Azure Arkitekt</h1>
+      <p>Sikre, skalerbare skyløsninger med fokus på governance, automatisering og moderne sikkerhet.</p>
+    </div>
+  </section>
 
-<!-- OM MEG -->
-<section id="om">
-  <div class="card">
-    <h2>Om meg</h2>
-    <p>
-      Erfaren IT-arkitekt med fokus på Azure, sikkerhet og plattformdesign.
-      Designer og implementerer løsninger basert på Cloud Adoption Framework
-      og Well-Architected Framework.
-    </p>
-  </div>
-</section>
+  <section id="om">
+    <div class="container">
+      <div class="card">
+        <h2>Om meg</h2>
+        <p>
+          Jeg er en erfaren IT-arkitekt med fokus på Azure, sikkerhet, plattformdesign og automatisering.
+          Jeg designer og implementerer skyløsninger som er bygget for drift, sikkerhet og videre vekst.
+        </p>
+        <p>
+          Jeg jobber strukturert med etablerte rammeverk som Cloud Adoption Framework og Well-Architected Framework,
+          og kombinerer strategi, teknologi og praktisk gjennomføring.
+        </p>
+        <p class="highlight">
+          Målet er løsninger som fungerer i virkeligheten, ikke bare på tegnebrettet.
+        </p>
+      </div>
+    </div>
+  </section>
 
-<!-- KOMPETANSE -->
-<section id="kompetanse">
-  <div class="card">
-    <h2>Kompetanse</h2>
-    <ul>
-      <li>Azure Landing Zones</li>
-      <li>Terraform og Infrastructure as Code</li>
-      <li>Azure DevOps og CI/CD</li>
-      <li>Zero Trust og sikkerhetsarkitektur</li>
-    </ul>
-  </div>
-</section>
+  <section id="kompetanse">
+    <div class="container">
+      <div class="card">
+        <h2>Kompetanse</h2>
 
-<!-- ZERO TRUST -->
-<section id="zerotrust">
-  <div class="card">
-    <h2>🔐 Zero Trust i praksis</h2>
-<img src="bilder/zerotrust.jpeg" 
-         style="width:100%; border-radius:10px; margin:20px 0;">
-    <p>
-      Jeg designer løsninger basert på Zero Trust-prinsipper:
-      aldri stol på noe – verifiser alt.
-    </p>
+        <div class="skills-grid">
+          <div class="skill-box">
+            <h3>Azure Landing Zones</h3>
+            <p>Design og etablering av sikre og skalerbare plattformmiljøer med tydelig struktur og governance.</p>
+          </div>
 
-    <ul>
-      <li>Identitet som sikkerhetsperimeter (Entra ID)</li>
-      <li>Conditional Access basert på risiko</li>
-      <li>Nettverkssegmentering (hub/spoke)</li>
-      <li>Private endpoints og ingen direkte eksponering</li>
-      <li>Full logging og overvåkning</li>
-    </ul>
+          <div class="skill-box">
+            <h3>Terraform og IaC</h3>
+            <p>Automatisert oppsett av infrastruktur med fokus på standardisering, sporbarhet og kvalitet.</p>
+          </div>
 
-    <p><strong>
-      Resultat: En sikker plattform som er bygget riktig fra start.
-    </strong></p>
-  </div>
-</section>
+          <div class="skill-box">
+            <h3>Azure DevOps og CI/CD</h3>
+            <p>Bygging av pipelines for effektiv, sikker og repeterbar utrulling av plattform og tjenester.</p>
+          </div>
 
-<!-- KONTAKT -->
-<section id="kontakt">
-  <div class="card">
-    <h2>Kontakt</h2>
-    <p>Ta kontakt via LinkedIn eller e-post</p>
-  </div>
-</section>
+          <div class="skill-box">
+            <h3>Sikkerhetsarkitektur</h3>
+            <p>Praktisk arbeid med Zero Trust, identitet, policy, nettverkssikkerhet og overvåkning.</p>
+          </div>
+
+          <div class="skill-box">
+            <h3>Governance</h3>
+            <p>Struktur, kontroll og ansvar gjennom Azure Policy, rollefordeling og gode driftsmodeller.</p>
+          </div>
+
+          <div class="skill-box">
+            <h3>Hybrid og drift</h3>
+            <p>Erfaring med både sky og tradisjonell infrastruktur, med fokus på drift, sikkerhet og forbedring over tid.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="eksempler">
+    <div class="container">
+      <div class="card">
+        <h2>Eksempler på hva jeg leverer</h2>
+        <ul>
+          <li>Design av Azure hostingplattform basert på CAF og WAF</li>
+          <li>Etablering av Landing Zones med Terraform og Azure DevOps</li>
+          <li>Innføring av governance, policy og standardisering</li>
+          <li>Sikre nettverksmønstre med segmentering og private endpoints</li>
+          <li>Plattform for drift, overvåkning og videre utvikling</li>
+        </ul>
+
+        <h3>Arbeidsform</h3>
+        <p>
+          Jeg kombinerer arkitektur, sikkerhet og praktisk levering. Det betyr tydelige prinsipper,
+          gode workshops, dokumenterte valg og løsninger som kan driftes og videreutvikles.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="zerotrust">
+    <div class="container">
+      <div class="card">
+        <h2>🔐 Zero Trust i praksis</h2>
+
+        <!-- Bytt filnavn hvis bildet heter noe annet -->
+        <img src="bilder/zerotrust.png" alt="Zero Trust i Azure" class="zerotrust-image">
+
+        <p>
+          Moderne sikkerhet handler ikke bare om å beskytte utsiden. I en moderne plattform må tilgang,
+          identitet og kontroll bygges inn fra starten.
+        </p>
+
+        <p>
+          Jeg designer løsninger basert på <strong>Zero Trust-prinsipper</strong>:
+          aldri stol på noe, verifiser alt.
+        </p>
+
+        <h3>Hva det betyr i praksis</h3>
+        <ul>
+          <li>Identitet er den nye sikkerhetsperimeteren med Microsoft Entra ID</li>
+          <li>Conditional Access styrer tilgang basert på risiko, enhet og lokasjon</li>
+          <li>Nettverk segmenteres med hub/spoke og private endpoints</li>
+          <li>Ingen direkte tilgang, kun gjennom sikre kontrollpunkter</li>
+          <li>Logging, innsikt og overvåkning bygges inn som en del av plattformen</li>
+        </ul>
+
+        <h3>Teknisk implementasjon</h3>
+        <p>
+          Dette kan implementeres gjennom Azure Landing Zones, Azure Policy, Terraform og CI/CD i Azure DevOps,
+          slik at sikkerhet, standardisering og skalerbarhet blir en naturlig del av løsningen.
+        </p>
+
+        <p class="highlight">
+          Resultat: En sikker, skalerbar og revisjonsvennlig plattform hvor tilgang styres dynamisk og risiko reduseres kontinuerlig.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontakt">
+    <div class="container">
+      <div class="cta">
+        <h2>Kontakt</h2>
+        <p>
+          Ønsker du en arkitekt som kombinerer Azure, sikkerhet, governance og praktisk gjennomføring,
+          er du velkommen til å ta kontakt.
+        </p>
+        <p><strong>LinkedIn eller e-post</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © Anne Grethe | Azure, sikkerhet og plattformdesign
+  </footer>
 
 </body>
 </html>
