@@ -11,6 +11,10 @@
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: Arial, sans-serif;
       line-height: 1.6;
@@ -21,7 +25,7 @@
     header {
       background: linear-gradient(135deg, #0f172a, #1e3a8a);
       color: white;
-      padding: 20px 0;
+      padding: 18px 0;
       position: sticky;
       top: 0;
       z-index: 1000;
@@ -33,7 +37,7 @@
       margin: 0 auto;
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 10px;
       justify-content: center;
       padding: 0 20px;
     }
@@ -44,7 +48,8 @@
       font-weight: 600;
       padding: 10px 14px;
       border-radius: 8px;
-      transition: 0.2s ease;
+      transition: background 0.2s ease;
+      font-size: 0.95rem;
     }
 
     nav a:hover {
@@ -53,7 +58,7 @@
 
     .hero {
       background: linear-gradient(135deg, #dbeafe, #eff6ff);
-      padding: 70px 20px 50px;
+      padding: 80px 20px 55px;
       text-align: center;
     }
 
@@ -63,15 +68,15 @@
     }
 
     .hero h1 {
-      font-size: 2.5rem;
+      font-size: 2.7rem;
       margin-bottom: 16px;
       color: #0f172a;
     }
 
     .hero p {
       font-size: 1.15rem;
-      max-width: 850px;
-      margin: 0 auto 24px;
+      max-width: 860px;
+      margin: 0 auto 26px;
       color: #334155;
     }
 
@@ -109,7 +114,7 @@
     }
 
     section .intro {
-      max-width: 820px;
+      max-width: 840px;
       margin: 0 auto 40px;
       text-align: center;
       color: #475569;
@@ -169,6 +174,7 @@
       border-radius: 16px;
       box-shadow: 0 8px 20px rgba(15,23,42,0.08);
       font-weight: 600;
+      color: #1f2937;
     }
 
     footer {
@@ -192,6 +198,15 @@
       .hero h1 {
         font-size: 2rem;
       }
+
+      nav {
+        gap: 6px;
+      }
+
+      nav a {
+        font-size: 0.9rem;
+        padding: 8px 10px;
+      }
     }
   </style>
 </head>
@@ -205,8 +220,8 @@
       <a href="#governance">Governance</a>
       <a href="#sikkerhet">Sikkerhet</a>
       <a href="#hybrid-drift">Hybrid drift</a>
-      <a href="#waf">WAF</a>
       <a href="#caf">CAF</a>
+      <a href="#waf">WAF</a>
       <a href="#sertifiseringer">Sertifiseringer</a>
     </nav>
   </header>
@@ -216,8 +231,9 @@
       <h1>Anne Grethe Knutsen</h1>
       <p>
         Erfaren IT-arkitekt med spisskompetanse innen Azure, Enterprise Landing Zones,
-        Terraform, Azure DevOps, governance, sikkerhet og hybrid drift. Jeg designer og
-        implementerer sikre, skalerbare skyløsninger som skaper verdi over tid.
+        Terraform, Azure DevOps, governance, sikkerhet, hybrid drift, Cloud Adoption Framework
+        og Well-Architected Framework. Jeg designer og implementerer sikre, skalerbare
+        skyløsninger som skaper verdi over tid.
       </p>
       <div class="hero-links">
         <a class="btn-primary" href="mailto:greknuts@online.no">greknuts@online.no</a>
@@ -237,18 +253,17 @@
       <div class="text-card">
         <h3>Bygg et solid fundament i Azure</h3>
         <p>
-          Azure Landing Zones gir en strukturert tilnærming til etablering av en sikker og
-          styrbar skyplattform. Med riktige prinsipper fra start blir det enklere å skalere,
-          automatisere og forvalte tjenester over tid.
+          Azure Landing Zones gir en strukturert tilnærming til etablering av en sikker og styrbar
+          skyplattform. Med riktige prinsipper fra start blir det enklere å skalere, automatisere
+          og forvalte tjenester over tid.
         </p>
         <p>
-          Jeg jobber med etablering av plattformsoner som støtter både governance, nettverk,
-          identitet, sikkerhet og drift, slik at applikasjonsteam kan levere raskere på et
-          trygt fundament.
+          Jeg jobber med etablering av plattformsoner som støtter governance, nettverk, identitet,
+          sikkerhet og drift, slik at applikasjonsteam kan levere raskere på et trygt fundament.
         </p>
       </div>
       <div class="image-card">
-        <img src="azure-arkitektur.png" alt="Azure Landing Zones" />
+        <img src="azure-landing-zones.jpg" alt="Azure Landing Zones" />
       </div>
     </div>
   </section>
@@ -271,7 +286,7 @@
         </p>
       </div>
       <div class="image-card">
-        <img src="terraformiac.png" alt="Terraform og IaC" />
+        <img src="terraform-iac.jpg" alt="Terraform og IaC" />
       </div>
     </div>
   </section>
@@ -293,7 +308,7 @@
         </p>
       </div>
       <div class="image-card">
-        <img src="devops.png" alt="Azure DevOps" />
+        <img src="azure-devops.jpg" alt="Azure DevOps" />
       </div>
     </div>
   </section>
@@ -311,12 +326,12 @@
           prinsipper, policyer, ansvar og standarder blir det lettere å levere sikkert og effektivt.
         </p>
         <p>
-          Jeg jobber med rammeverk og praktiske tiltak som gir virksomheten bedre kontroll på kostnader,
-          sikkerhet, etterlevelse og operasjonell modenhet.
+          Jeg jobber med rammeverk og praktiske tiltak som gir virksomheten bedre kontroll på
+          kostnader, sikkerhet, etterlevelse og operasjonell modenhet.
         </p>
       </div>
       <div class="image-card">
-        <img src="governance.png" alt="Governance" />
+        <img src="governance.jpg" alt="Governance" />
       </div>
     </div>
   </section>
@@ -340,7 +355,7 @@
         </p>
       </div>
       <div class="image-card">
-        <img src="zerotrust.jpeg" alt="Sikkerhet" />
+        <img src="sikkerhet.jpg" alt="Sikkerhet" />
       </div>
     </div>
   </section>
@@ -355,8 +370,7 @@
         <h3>Det beste fra to verdener</h3>
         <p>
           Hybrid drift handler om å skape gode samspill mellom on-prem, identitet, nettverk,
-          sikkerhet og tjenester i skyen. Dette krever både teknisk forståelse og gode
-          driftsmodeller.
+          sikkerhet og tjenester i skyen. Dette krever både teknisk forståelse og gode driftsmodeller.
         </p>
         <p>
           Jeg har erfaring med løsninger som kombinerer tradisjonell infrastruktur med Azure,
@@ -364,31 +378,7 @@
         </p>
       </div>
       <div class="image-card">
-        <img src="hybrid.png" alt="Hybrid drift" />
-      </div>
-    </div>
-  </section>
-
-  <section id="waf">
-    <h2>WAF</h2>
-    <p class="intro">
-      Beskyttelse av webapplikasjoner mot vanlige angrep og uønsket trafikk.
-    </p>
-    <div class="content-grid">
-      <div class="text-card">
-        <h3>Web Application Firewall</h3>
-        <p>
-          En WAF beskytter applikasjoner mot trusler som SQL injection, cross-site scripting
-          og andre angrep rettet mot webtrafikk. Dette gir et ekstra sikkerhetslag mellom
-          internett og applikasjonen.
-        </p>
-        <p>
-          WAF er en viktig del av en moderne sikkerhetsarkitektur og støtter prinsippet om
-          innebygd sikkerhet i plattformen.
-        </p>
-      </div>
-      <div class="image-card">
-        <img src="waf.jpg" alt="WAF" />
+        <img src="hybrid-drift.jpg" alt="Hybrid drift" />
       </div>
     </div>
   </section>
@@ -398,21 +388,44 @@
     <p class="intro">
       Cloud Adoption Framework gir struktur for planlegging, etablering, styring og drift i skyen.
     </p>
-    <div class="content-grid reverse">
+    <div class="content-grid">
       <div class="text-card">
         <h3>Cloud Adoption Framework</h3>
         <p>
           CAF hjelper virksomheter med å lykkes i skyreisen gjennom tydelige prinsipper for strategi,
-          plan, organisering, governance, sikkerhet og plattform. Det gir et språk og et rammeverk
-          som gjør modernisering mer målrettet.
+          plan, organisering, governance, sikkerhet og plattform. Det gir et rammeverk for å jobbe
+          mer helhetlig og målrettet i Azure.
         </p>
         <p>
-          Jeg bruker CAF som støtte for å bygge bærekraftige Azure-plattformer som er klare for både
-          drift, videreutvikling og vekst.
+          Jeg bruker CAF som støtte for å bygge bærekraftige Azure-plattformer som er klare for
+          både drift, videreutvikling og vekst.
         </p>
       </div>
       <div class="image-card">
-        <img src="caf.jpg" alt="CAF" />
+        <img src="caf.jpg" alt="Cloud Adoption Framework" />
+      </div>
+    </div>
+  </section>
+
+  <section id="waf">
+    <h2>WAF</h2>
+    <p class="intro">
+      Well-Architected Framework bidrar til robuste, effektive og sikre skyløsninger.
+    </p>
+    <div class="content-grid reverse">
+      <div class="text-card">
+        <h3>Well-Architected Framework</h3>
+        <p>
+          WAF brukes for å evaluere og forbedre arkitekturvalg i Azure. Rammeverket hjelper med å
+          balansere krav til pålitelighet, sikkerhet, kostnadsstyring, ytelse og driftbarhet.
+        </p>
+        <p>
+          Jeg bruker Well-Architected Framework for å kvalitetssikre løsninger og sikre at plattformen
+          ikke bare fungerer i dag, men også tåler vekst, endringer og fremtidige behov.
+        </p>
+      </div>
+      <div class="image-card">
+        <img src="waf.jpg" alt="Well-Architected Framework" />
       </div>
     </div>
   </section>
