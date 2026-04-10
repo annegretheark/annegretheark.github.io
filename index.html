@@ -1,684 +1,142 @@
 <!DOCTYPE html>
 <html lang="no">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-F5W2F9E446"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anne Grethe | Azure Arkitekt</title>
 
-  gtag('config', 'G-F5W2F9E446');
-</script>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Azure-plattform og løsningsdesign</title>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-F5W2F9E446"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-F5W2F9E446');
+  </script>
+
   <style>
-    :root {
-      --bg: #0b1220;
-      --bg-soft: #111a2e;
-      --card: rgba(255,255,255,0.08);
-      --line: rgba(255,255,255,0.12);
-      --text: #eaf1ff;
-      --muted: #b7c3df;
-      --accent: #66b3ff;
-      --accent-2: #6ee7b7;
-      --shadow: 0 20px 50px rgba(0,0,0,0.35);
-      --radius: 22px;
-      --max: 1180px;
-    }
-
-    * { box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
-
     body {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(102,179,255,0.18), transparent 28%),
-        radial-gradient(circle at top right, rgba(110,231,183,0.12), transparent 20%),
-        linear-gradient(180deg, #08101d 0%, #0b1220 100%);
-      line-height: 1.6;
+      font-family: Arial, sans-serif;
+      scroll-behavior: smooth;
     }
 
-    a { color: inherit; text-decoration: none; }
-
-    .container {
-      width: min(var(--max), calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    .nav {
-      position: sticky;
+    nav {
+      position: fixed;
       top: 0;
-      z-index: 30;
-      backdrop-filter: blur(14px);
-      background: rgba(8, 16, 29, 0.72);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .nav-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      padding: 14px 0;
-    }
-
-    .brand {
-      font-weight: 700;
-      font-size: 1.05rem;
-      letter-spacing: 0.2px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-      font-size: 0.95rem;
-      color: var(--muted);
-    }
-
-    .hero {
-      padding: 72px 0 36px;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 28px;
-      align-items: center;
-    }
-
-    .eyebrow {
-      display: inline-block;
-      padding: 8px 14px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: rgba(255,255,255,0.04);
-      color: var(--accent-2);
-      font-size: 0.9rem;
-      margin-bottom: 18px;
-    }
-
-    h1, h2, h3 { margin: 0 0 14px; line-height: 1.15; }
-
-    h1 {
-      font-size: clamp(2.1rem, 4vw, 4.2rem);
-      letter-spacing: -0.02em;
-    }
-
-    .lead {
-      font-size: 1.08rem;
-      color: var(--muted);
-      max-width: 62ch;
-      margin-bottom: 24px;
-    }
-
-    .cta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 8px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 13px 18px;
-      border-radius: 14px;
-      font-weight: 700;
-      border: 1px solid transparent;
-      transition: transform 0.2s ease, opacity 0.2s ease, border-color 0.2s ease;
-    }
-
-    .btn:hover { transform: translateY(-2px); }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), #4f8fff);
-      color: #07101f;
-      box-shadow: var(--shadow);
-    }
-
-    .btn-secondary {
-      border-color: var(--line);
-      background: rgba(255,255,255,0.03);
-      color: var(--text);
-    }
-
-    .hero-card,
-    .card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-
-    .hero-card {
-      overflow: hidden;
-    }
-
-    .hero-card img {
       width: 100%;
-      height: 100%;
-      min-height: 320px;
-      object-fit: cover;
-      display: block;
-      background: #0f1728;
+      background: #0a2540;
+      padding: 15px;
+      text-align: center;
+      z-index: 1000;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #00b4d8;
     }
 
     section {
-      padding: 36px 0;
+      padding: 80px 20px;
+      margin-top: 50px;
     }
 
-    .section-title {
-      font-size: clamp(1.6rem, 2.5vw, 2.3rem);
-      margin-bottom: 10px;
-    }
-
-    .section-intro {
-      color: var(--muted);
-      max-width: 72ch;
-      margin-bottom: 24px;
-    }
-
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
+    .hero {
+      background: linear-gradient(135deg, #0a2540, #1d4e89);
+      color: white;
+      text-align: center;
+      padding: 120px 20px;
     }
 
     .card {
-      padding: 22px;
-    }
-
-    .card h3 {
-      font-size: 1.1rem;
-      margin-bottom: 10px;
-    }
-
-    .card p,
-    .card li {
-      color: var(--muted);
-    }
-
-    ul {
-      margin: 0;
-      padding-left: 18px;
-    }
-
-    .highlight {
-      color: var(--accent-2);
-      font-weight: 700;
-    }
-
-    .image-panel {
-      overflow: hidden;
-      padding: 0;
-    }
-
-    .image-panel img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      min-height: 340px;
-      object-fit: cover;
-      background: #0f1728;
-    }
-
-    .process-step {
-      position: relative;
-      padding-left: 22px;
-    }
-
-    .process-step::before {
-      content: "";
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--accent);
-      position: absolute;
-      left: 0;
-      top: 9px;
-      box-shadow: 0 0 0 6px rgba(102,179,255,0.12);
-    }
-
-    .contact-box {
-      text-align: center;
-      padding: 34px 24px;
-      margin-top: 10px;
-    }
-
-    footer {
-      padding: 28px 0 48px;
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    @media (max-width: 960px) {
-      .hero-grid,
-      .grid-3,
-      .grid-2 {
-        grid-template-columns: 1fr;
-      }
-
-      .hero {
-        padding-top: 44px;
-      }
-
-      .nav-inner {
-        align-items: flex-start;
-        flex-direction: column;
-      }
+      background: #f5f7fa;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 900px;
+      margin: auto;
     }
   </style>
 </head>
+
 <body>
-  <nav class="nav">
-    <div class="container nav-inner">
-      <a href="#top" class="brand">Azure-plattform • Løsningsdesign</a>
-      <div class="nav-links">
-        <a href="#oversikt">Oversikt</a>
-        <a href="#arkitektur">Arkitektur</a>
-        <a href="#metode">Metode</a>
-        <a href="#sikkerhet">Sikkerhet</a>
-        <a href="#kontakt">Kontakt</a>
-      </div>
-    </div>
-  </nav>
 
-  <header class="hero" id="top">
-    <div class="container hero-grid">
-      <div>
-        <div class="eyebrow">Azure CAF • WAF • Governance • Automatisering</div>
-        <h1>Skalerbar hostingplattform i Azure, bygget for kontroll, fart og trygg drift</h1>
-        <p class="lead">
-          Jeg designer og bygger sikre, skalerbare plattformer i Azure med fokus på governance,
-          automatisering og reell forretningsverdi. Jeg trives i skjæringspunktet mellom teknologi,
-          arkitektur og mennesker, og bidrar til å gjøre komplekse landskap enklere, tryggere og mer robuste.
-        </p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="#arkitektur">Se arkitekturen</a>
-          <a class="btn btn-secondary" href="#kontakt">Ta kontakt</a>
-        </div>
-      </div>
+<!-- MENY -->
+<nav>
+  <a href="#hjem">Hjem</a>
+  <a href="#om">Om meg</a>
+  <a href="#kompetanse">Kompetanse</a>
+  <a href="#zerotrust">Zero Trust</a>
+  <a href="#kontakt">Kontakt</a>
+</nav>
 
-      <div class="hero-card">
-        <svg viewBox="0 0 900 620" width="100%" height="100%" aria-label="Illustrasjon av Azure-plattform" style="display:block; min-height:320px; background:linear-gradient(180deg,#0b1730 0%, #13254a 100%);">
-          <defs>
-            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#66b3ff"/>
-              <stop offset="100%" stop-color="#6ee7b7"/>
-            </linearGradient>
-            <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#172b53"/>
-              <stop offset="100%" stop-color="#0f1d39"/>
-            </linearGradient>
-          </defs>
-          <rect width="900" height="620" fill="url(#g2)"/>
-          <circle cx="710" cy="120" r="120" fill="rgba(102,179,255,0.12)"/>
-          <circle cx="180" cy="520" r="150" fill="rgba(110,231,183,0.08)"/>
-          <rect x="70" y="70" rx="28" ry="28" width="760" height="90" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.12)"/>
-          <text x="450" y="123" text-anchor="middle" fill="#eaf1ff" font-size="34" font-family="Arial, Helvetica, sans-serif" font-weight="700">Felles Azure-plattform</text>
-          <rect x="120" y="220" rx="24" ry="24" width="220" height="120" fill="rgba(255,255,255,0.08)" stroke="#66b3ff"/>
-          <text x="230" y="275" text-anchor="middle" fill="#eaf1ff" font-size="26" font-family="Arial, Helvetica, sans-serif" font-weight="700">Governance</text>
-          <text x="230" y="308" text-anchor="middle" fill="#b7c3df" font-size="18" font-family="Arial, Helvetica, sans-serif">Policy • Struktur • Kontroll</text>
-          <rect x="385" y="220" rx="24" ry="24" width="130" height="120" fill="url(#g1)"/>
-          <text x="450" y="278" text-anchor="middle" fill="#07101f" font-size="26" font-family="Arial, Helvetica, sans-serif" font-weight="700">Azure</text>
-          <text x="450" y="308" text-anchor="middle" fill="#07101f" font-size="18" font-family="Arial, Helvetica, sans-serif">Plattform</text>
-          <rect x="560" y="220" rx="24" ry="24" width="220" height="120" fill="rgba(255,255,255,0.08)" stroke="#6ee7b7"/>
-          <text x="670" y="275" text-anchor="middle" fill="#eaf1ff" font-size="26" font-family="Arial, Helvetica, sans-serif" font-weight="700">Automatisering</text>
-          <text x="670" y="308" text-anchor="middle" fill="#b7c3df" font-size="18" font-family="Arial, Helvetica, sans-serif">Terraform • CI/CD</text>
-          <line x1="340" y1="280" x2="385" y2="280" stroke="#66b3ff" stroke-width="6" stroke-linecap="round"/>
-          <line x1="515" y1="280" x2="560" y2="280" stroke="#6ee7b7" stroke-width="6" stroke-linecap="round"/>
-          <rect x="110" y="415" rx="22" ry="22" width="680" height="115" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)"/>
-          <text x="450" y="463" text-anchor="middle" fill="#eaf1ff" font-size="28" font-family="Arial, Helvetica, sans-serif" font-weight="700">Sikker, skalerbar og driftseffektiv plattform</text>
-          <text x="450" y="497" text-anchor="middle" fill="#b7c3df" font-size="18" font-family="Arial, Helvetica, sans-serif">Separasjon mellom plattform og applikasjoner • Zero Trust • Overvåkning</text>
-        </svg>
-      </div>
-    </div>
-  </header>
+<!-- HERO -->
+<section id="hjem" class="hero">
+  <h1>Azure Arkitekt</h1>
+  <p>Sikre, skalerbare skyløsninger med fokus på governance og automatisering</p>
+</section>
 
-  <section id="oversikt">
-    <div class="container">
-      <h2 class="section-title">Hva denne siden viser</h2>
-      <p class="section-intro">
-        Siden er laget for å gi et raskt og profesjonelt overblikk over et løsningsforslag for en Azure-basert
-        hostingplattform. Den passer fint som porteføljeside, landingsside eller eksempel på hvordan du tenker
-        rundt plattform, sikkerhet og drift.
-      </p>
+<!-- OM MEG -->
+<section id="om">
+  <div class="card">
+    <h2>Om meg</h2>
+    <p>
+      Erfaren IT-arkitekt med fokus på Azure, sikkerhet og plattformdesign.
+      Designer og implementerer løsninger basert på Cloud Adoption Framework
+      og Well-Architected Framework.
+    </p>
+  </div>
+</section>
 
-      <div class="grid-3">
-        <div class="card">
-          <h3>1. Tydelig plattformmodell</h3>
-          <p>Bygget med <span class="highlight">separasjon av ansvar</span> mellom plattformteam og applikasjonsteam for bedre kontroll og enklere skalering.</p>
-        </div>
-        <div class="card">
-          <h3>2. Styring fra start</h3>
-          <p>Governance, policyer, nettverk, identitet og sikkerhet er tenkt inn tidlig, ikke lagt oppå i etterkant.</p>
-        </div>
-        <div class="card">
-          <h3>3. Drift som tåler vekst</h3>
-          <p>Automatisering, standardisering og overvåkning gjør plattformen mer robust og mindre personavhengig.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- KOMPETANSE -->
+<section id="kompetanse">
+  <div class="card">
+    <h2>Kompetanse</h2>
+    <ul>
+      <li>Azure Landing Zones</li>
+      <li>Terraform og Infrastructure as Code</li>
+      <li>Azure DevOps og CI/CD</li>
+      <li>Zero Trust og sikkerhetsarkitektur</li>
+    </ul>
+  </div>
+</section>
 
-  <section id="arkitektur">
-    <div class="container">
-      <h2 class="section-title">Arkitektur og prinsipper</h2>
-      <p class="section-intro">
-        Eksempelet under viser hvordan man kan etablere et sikkert og effektivt plattformfundament i Azure med
-        utgangspunkt i CAF og WAF, samtidig som applikasjonsteam får frihet innenfor tydelige rammer.
-      </p>
+<!-- ZERO TRUST -->
+<section id="zerotrust">
+  <div class="card">
+    <h2>🔐 Zero Trust i praksis</h2>
 
-      <div class="grid-2">
-        <div class="card">
-          <h3>Plattformlaget</h3>
-          <ul>
-            <li>Landing zones med felles mønstre og guardrails</li>
-            <li>Sentral nettverksarkitektur og identitetsstyring</li>
-            <li>Azure Policy og compliance-kontroll</li>
-            <li>Felles logging, overvåkning og sikkerhetskapabiliteter</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>Applikasjonslaget</h3>
-          <ul>
-            <li>Team utvikler og drifter egne tjenester innenfor standarder</li>
-            <li>CI/CD med sporbarhet og forutsigbar leveranse</li>
-            <li>Infrastruktur som kode for repeterbar utrulling</li>
-            <li>Skalerbar modell for nåværende og fremtidige tjenester</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
+    <p>
+      Jeg designer løsninger basert på Zero Trust-prinsipper:
+      aldri stol på noe – verifiser alt.
+    </p>
 
-  <section>
-    <div class="container grid-2">
-      <div class="card image-panel">
-        <svg viewBox="0 0 900 620" width="100%" height="100%" aria-label="Illustrasjon av governance og ansvar" style="display:block; min-height:340px; background:linear-gradient(180deg,#091326 0%, #0d1a34 100%);">
-          <rect width="900" height="620" fill="transparent"/>
-          <rect x="70" y="65" rx="30" ry="30" width="760" height="85" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.12)"/>
-          <text x="450" y="118" text-anchor="middle" fill="#eaf1ff" font-size="34" font-family="Arial, Helvetica, sans-serif" font-weight="700">Forvaltning og ansvar</text>
-          <rect x="105" y="210" rx="24" ry="24" width="290" height="260" fill="rgba(102,179,255,0.12)" stroke="#66b3ff"/>
-          <text x="250" y="258" text-anchor="middle" fill="#eaf1ff" font-size="26" font-family="Arial, Helvetica, sans-serif" font-weight="700">Plattformteam</text>
-          <text x="250" y="298" text-anchor="middle" fill="#b7c3df" font-size="18" font-family="Arial, Helvetica, sans-serif">Plattformdrift</text>
-          <text x="250" y="332" text-anchor="middle" fill="#b7c3df" font-size="18" font-family="Arial, Helvetica, sans-serif">Governance, sikkerhet</text>
-          <text x="250" y="366" text-anchor="middle" fill="#b7c3df" font-size="18" font-family="Arial, Helvetica, sans-serif">Nettverk og standarder</text>
-          <rect x="505" y="210" rx="24" ry="24" width="290" height="260" fill="rgba(110,231,183,0.10)" stroke="#6ee7b7"/>
-          <text x="650" y="258" text-anchor="middle" fill="#eaf1ff" font-size="26" font-family="Arial, Helvetica, sans-serif" font-weight="700">Applikasjonsteam</text>
-          <text x="650" y="298" text-anchor="middle" fill="#b7c3df" font-size="18" font-family="Arial, Helvetica, sans-serif">Utvikler egne tjenester</text>
-          <text x="650" y="332" text-anchor="middle" fill="#b7c3df" font-size="18" font-family="Arial, Helvetica, sans-serif">Drifter innenfor rammer</text>
-          <text x="650" y="366" text-anchor="middle" fill="#b7c3df" font-size="18" font-family="Arial, Helvetica, sans-serif">Leverer raskere og tryggere</text>
-          <line x1="395" y1="340" x2="505" y2="340" stroke="url(#linkGrad)" stroke-width="8" stroke-linecap="round"/>
-          <defs>
-            <linearGradient id="linkGrad" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stop-color="#66b3ff"/>
-              <stop offset="100%" stop-color="#6ee7b7"/>
-            </linearGradient>
-          </defs>
-          <rect x="175" y="520" rx="16" ry="16" width="550" height="52" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.12)"/>
-          <text x="450" y="553" text-anchor="middle" fill="#eaf1ff" font-size="20" font-family="Arial, Helvetica, sans-serif">Standardisering og automatisering gir kontroll og fart</text>
-        </svg>
-      </div>
-      <div class="card">
-        <h3>Hvorfor dette fungerer</h3>
-        <p>
-          Når plattformen standardiseres, blir det lettere å bygge sikkert, raskt og likt. Det gir bedre økonomisk kontroll,
-          færre spesialløsninger og mindre risiko for at drift blir avhengig av enkeltpersoner.
-        </p>
-        <p>
-          Målet er ikke mest mulig kompleksitet. Målet er en modell som er <span class="highlight">enkel nok til å driftes</span>,
-          men sterk nok til å støtte virksomhetskritiske tjenester over tid.
-        </p>
-      </div>
-    </div>
-  </section>
+    <ul>
+      <li>Identitet som sikkerhetsperimeter (Entra ID)</li>
+      <li>Conditional Access basert på risiko</li>
+      <li>Nettverkssegmentering (hub/spoke)</li>
+      <li>Private endpoints og ingen direkte eksponering</li>
+      <li>Full logging og overvåkning</li>
+    </ul>
 
-  <section id="metode">
-    <div class="container">
-      <h2 class="section-title">Metodisk tilnærming</h2>
-      <p class="section-intro">
-        God arkitektur starter ikke i portalen. Den starter i behov, ansvar og valg av standarder.
-      </p>
+    <p><strong>
+      Resultat: En sikker plattform som er bygget riktig fra start.
+    </strong></p>
+  </div>
+</section>
 
-      <div class="grid-2">
-        <div class="card process-step">
-          <h3>Behov og prinsipper</h3>
-          <p>Kartlegg behov, kritikalitet, avhengigheter og ønsket modenhet. Bli enige om prinsipper før bygging starter.</p>
-        </div>
-        <div class="card process-step">
-          <h3>Målarkitektur</h3>
-          <p>Definer ønsket målarkitektur med tydelig ansvar, sikkerhetsmodell, nettverk, policyer og driftsmodell.</p>
-        </div>
-        <div class="card process-step">
-          <h3>Automatisering</h3>
-          <p>Bygg plattformkapabiliteter med IaC og CI/CD slik at miljøer kan etableres likt hver gang.</p>
-        </div>
-        <div class="card process-step">
-          <h3>Kontinuerlig forbedring</h3>
-          <p>Bruk måling, logging, kostnadsoppfølging og erfaringer fra drift til å forbedre plattformen fortløpende.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- KONTAKT -->
+<section id="kontakt">
+  <div class="card">
+    <h2>Kontakt</h2>
+    <p>Ta kontakt via LinkedIn eller e-post</p>
+  </div>
+</section>
 
-  <section id="sikkerhet">
-    <div class="container">
-      <h2 class="section-title">Sikkerhet og overvåkning</h2>
-      <p class="section-intro">
-        En god plattform gjør sikkerhet til en innebygget egenskap, ikke et ekstra prosjekt som kommer senere.
-      </p>
-
-      <div class="grid-3">
-        <div class="card">
-          <h3>Identitet og tilgang</h3>
-          <p>Minste privilegium, rollebasert tilgang og tydelige administrative grenser reduserer angrepsflaten.</p>
-        </div>
-        <div class="card">
-          <h3>Synlighet</h3>
-          <p>Felles logging og overvåkning gjør det mulig å oppdage avvik tidlig og reagere raskere.</p>
-        </div>
-        <div class="card">
-          <h3>Etterlevelse</h3>
-          <p>Policyer og standarder gir bedre kontroll på krav, konfigurasjon og endringer over tid.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="kontakt">
-    <div class="container">
-      <div class="card contact-box">
-        <img src="bilder/profil.jpg" alt="Profilbilde" style="width:120px;height:120px;border-radius:50%;object-fit:cover;margin-bottom:16px;border:2px solid rgba(255,255,255,0.2);">
-        <h2 class="section-title">Anne Grethe Knutsen</h2>
-        <p class="section-intro" style="margin: 0 auto 14px; max-width:60ch;">
-          Erfaren IT-arkitekt med sterk kompetanse innen Azure, governance og automatisering. Jeg designer og implementerer sikre, skalerbare skyløsninger som skaper verdi over tid – der strategi, teknologi og mennesker spiller på lag.
-        </p>
-        <p style="font-style:italic; color: var(--accent-2); margin-bottom:18px;">
-          "En god plattform er ikke den mest avanserte – det er den som fungerer, skalerer og faktisk blir brukt."
-        </p>
-        <div class="cta-row" style="justify-content: center;">
-          <a class="btn btn-primary" href="mailto:greknuts@online.no">Send e-post</a>
-          <a class="btn btn-secondary" href="https://www.linkedin.com/in/anne-grethe-knutsen/" target="_blank">LinkedIn profil</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  
-  <section id="case">
-    <div class="container">
-      <h2 class="section-title">Eksempler på hva jeg kan bidra med</h2>
-      <p class="section-intro">
-        Her er noen typiske områder der jeg kan skape verdi, fra strategi og arkitektur til praktisk implementering og forbedring av drift.
-      </p>
-
-      <div class="grid-3">
-        <div class="card">
-          <h3>Azure plattform og landing zones</h3>
-          <p>Design av sikre og skalerbare plattformfundamenter med governance, policyer, nettverk, identitet og tydelig ansvarsdeling.</p>
-        </div>
-        <div class="card">
-          <h3>Automatisering med IaC og CI/CD</h3>
-          <p>Etablering av repeterbare leveranser med Terraform, Azure DevOps og GitHub Actions for raskere, tryggere og mer forutsigbar endring.</p>
-        </div>
-        <div class="card">
-          <h3>Sikkerhet som del av plattformen</h3>
-          <p>Bygger sikkerhet inn fra start med Zero Trust-prinsipper, tilgangsstyring, logging, overvåkning og kontinuerlig forbedring.</p>
-        </div>
-      </div>
-
-      <div class="grid-2" style="margin-top:20px;">
-        <div class="card">
-          <h3>Typiske leveranser</h3>
-          <ul>
-            <li>Målarkitektur og løsningsdesign</li>
-            <li>Landing zones og plattformstruktur i Azure</li>
-            <li>Governance-modell og sikkerhetsprinsipper</li>
-            <li>Automatisering av infrastruktur og utrulling</li>
-            <li>Dokumentasjon, workshops og kompetanseoverføring</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>Arbeidsform</h3>
-          <p>
-            Jeg liker å starte med behov, risiko og målbildet. Deretter bygger jeg en løsning som er enkel å forstå,
-            mulig å drifte og robust nok til å vare. Teknologi skal støtte virksomheten, ikke gjøre hverdagen tyngre.
-          </p>
-        </div>
-      </div>
-
-      <div class="grid-2" style="margin-top:20px; align-items:stretch;">
-        <div class="card">
-          <h3>Eksempel: Azure plattform med governance og automatisering</h3>
-          <p><strong>Utfordring:</strong> Manglende struktur, utydelig ansvar og manuelle prosesser gjør plattformen personavhengig og vanskelig å skalere.</p>
-          <p><strong>Løsning:</strong> Landing zones basert på Azure CAF, governance og sikkerhet med Azure Policy, Terraform og CI/CD, samt tydelig separasjon mellom plattform og applikasjonsteam.</p>
-          <p><strong>Resultat:</strong> En mer robust, skalerbar og driftseffektiv plattform med bedre sikkerhet, lavere risiko og mindre behov for manuelle operasjoner.</p>
-        </div>
-        <div class="card image-panel" style="padding:0;">
-          <svg viewBox="0 0 900 620" width="100%" height="100%" aria-label="Illustrasjon av case og gevinst" style="display:block; min-height:340px; background:linear-gradient(180deg,#0b1730 0%, #13254a 100%);">
-            <rect width="900" height="620" fill="transparent"/>
-            <rect x="80" y="75" rx="24" ry="24" width="210" height="110" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.15)"/>
-            <text x="185" y="128" text-anchor="middle" fill="#eaf1ff" font-size="24" font-family="Arial, Helvetica, sans-serif" font-weight="700">Utfordring</text>
-            <text x="185" y="157" text-anchor="middle" fill="#b7c3df" font-size="17" font-family="Arial, Helvetica, sans-serif">Manuelt og personavhengig</text>
-            <rect x="345" y="75" rx="24" ry="24" width="210" height="110" fill="rgba(102,179,255,0.15)" stroke="#66b3ff"/>
-            <text x="450" y="128" text-anchor="middle" fill="#eaf1ff" font-size="24" font-family="Arial, Helvetica, sans-serif" font-weight="700">Løsning</text>
-            <text x="450" y="157" text-anchor="middle" fill="#b7c3df" font-size="17" font-family="Arial, Helvetica, sans-serif">CAF • Policy • Terraform</text>
-            <rect x="610" y="75" rx="24" ry="24" width="210" height="110" fill="rgba(110,231,183,0.14)" stroke="#6ee7b7"/>
-            <text x="715" y="128" text-anchor="middle" fill="#eaf1ff" font-size="24" font-family="Arial, Helvetica, sans-serif" font-weight="700">Resultat</text>
-            <text x="715" y="157" text-anchor="middle" fill="#b7c3df" font-size="17" font-family="Arial, Helvetica, sans-serif">Kontroll, fart og trygg drift</text>
-            <line x1="290" y1="130" x2="345" y2="130" stroke="#66b3ff" stroke-width="6" stroke-linecap="round"/>
-            <line x1="555" y1="130" x2="610" y2="130" stroke="#6ee7b7" stroke-width="6" stroke-linecap="round"/>
-            <rect x="110" y="260" rx="28" ry="28" width="680" height="250" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)"/>
-            <text x="450" y="315" text-anchor="middle" fill="#eaf1ff" font-size="30" font-family="Arial, Helvetica, sans-serif" font-weight="700">Hva arbeidsgivere får</text>
-            <text x="450" y="365" text-anchor="middle" fill="#b7c3df" font-size="20" font-family="Arial, Helvetica, sans-serif">Tydelig retning for arkitektur</text>
-            <text x="450" y="402" text-anchor="middle" fill="#b7c3df" font-size="20" font-family="Arial, Helvetica, sans-serif">Sikkerhet som en del av plattformen</text>
-            <text x="450" y="439" text-anchor="middle" fill="#b7c3df" font-size="20" font-family="Arial, Helvetica, sans-serif">Automatisering som reduserer risiko og manuell drift</text>
-          </svg>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="ai-foundry">
-    <div class="container">
-      <h2 class="section-title">AI og Azure AI Foundry</h2>
-      <p class="section-intro">
-        Jeg ser på Azure AI Foundry som en naturlig videreføring av en moden plattformstrategi. Nye AI-tjenester bør bygges på en solid landing zone med governance, sikkerhet, identitetsstyring og kontroll på data fra start.
-      </p>
-      <div class="grid-2">
-        <div class="card">
-          <h3>Hvordan jeg tenker</h3>
-          <p>
-            Azure AI Foundry er ikke en erstatning for landing zone eller plattformfundament. Det er en tjeneste som bør etableres oppå en godt styrt Azure-plattform, slik at AI-løsninger kan utvikles trygt, skalerbart og i tråd med virksomhetens krav.
-          </p>
-          <ul>
-            <li>Riktig plassering i abonnement og nettverk</li>
-            <li>Tilgangsstyring og identitet fra start</li>
-            <li>Logging, overvåkning og kostnadskontroll</li>
-            <li>Trygg håndtering av data og integrasjoner</li>
-          </ul>
-        </div>
-        <div class="card image-panel" style="padding:0;">
-          <svg viewBox="0 0 900 620" width="100%" height="100%" aria-label="Illustrasjon av AI Foundry på en styrt Azure-plattform" style="display:block; min-height:340px; background:linear-gradient(180deg,#091326 0%, #102142 100%);">
-            <rect width="900" height="620" fill="transparent"/>
-            <rect x="105" y="415" rx="28" ry="28" width="690" height="110" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.14)"/>
-            <text x="450" y="465" text-anchor="middle" fill="#eaf1ff" font-size="30" font-family="Arial, Helvetica, sans-serif" font-weight="700">Landing zone og plattformfundament</text>
-            <text x="450" y="498" text-anchor="middle" fill="#b7c3df" font-size="18" font-family="Arial, Helvetica, sans-serif">Governance • Nettverk • Policy • Identitet • Overvåkning</text>
-            <rect x="250" y="225" rx="28" ry="28" width="400" height="120" fill="rgba(102,179,255,0.16)" stroke="#66b3ff"/>
-            <text x="450" y="278" text-anchor="middle" fill="#eaf1ff" font-size="30" font-family="Arial, Helvetica, sans-serif" font-weight="700">Azure AI Foundry</text>
-            <text x="450" y="312" text-anchor="middle" fill="#b7c3df" font-size="18" font-family="Arial, Helvetica, sans-serif">AI-tjenester bygget på en styrt plattform</text>
-            <line x1="450" y1="345" x2="450" y2="415" stroke="#6ee7b7" stroke-width="8" stroke-linecap="round"/>
-            <circle cx="450" cy="380" r="18" fill="#6ee7b7"/>
-            <rect x="95" y="90" rx="22" ry="22" width="190" height="80" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.12)"/>
-            <text x="190" y="138" text-anchor="middle" fill="#eaf1ff" font-size="22" font-family="Arial, Helvetica, sans-serif" font-weight="700">Data</text>
-            <rect x="355" y="90" rx="22" ry="22" width="190" height="80" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.12)"/>
-            <text x="450" y="138" text-anchor="middle" fill="#eaf1ff" font-size="22" font-family="Arial, Helvetica, sans-serif" font-weight="700">Modeller</text>
-            <rect x="615" y="90" rx="22" ry="22" width="190" height="80" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.12)"/>
-            <text x="710" y="138" text-anchor="middle" fill="#eaf1ff" font-size="22" font-family="Arial, Helvetica, sans-serif" font-weight="700">Applikasjoner</text>
-            <line x1="190" y1="170" x2="335" y2="225" stroke="#66b3ff" stroke-width="5" stroke-linecap="round"/>
-            <line x1="450" y1="170" x2="450" y2="225" stroke="#66b3ff" stroke-width="5" stroke-linecap="round"/>
-            <line x1="710" y1="170" x2="565" y2="225" stroke="#66b3ff" stroke-width="5" stroke-linecap="round"/>
-          </svg>
-        </div>
-      </div>
-      <div class="grid-2" style="margin-top:20px;">
-        <div class="card">
-          <h3>Praktisk eksempel</h3>
-          <p>
-            Et praktisk eksempel kan være å etablere en intern AI-assistent for dokumentasjon, drift eller saksbehandling. Løsningen bygges i Azure AI Foundry, men plasseres innenfor en eksisterende landing zone med riktig nettverksoppsett, tilgangsstyring, logging og kostnadskontroll.
-          </p>
-          <p>
-            Da får virksomheten raskere tilgang til AI-muligheter, samtidig som sikkerhet, styring og etterlevelse ivaretas fra første dag.
-          </p>
-        </div>
-        <div class="card">
-          <h3>Hva det krever i praksis</h3>
-          <ul>
-            <li>Definere riktig plassering og ansvar i plattformen</li>
-            <li>Etablere sikker tilgang til data og tjenester</li>
-            <li>Automatisere oppsett med IaC og CI/CD der det er hensiktsmessig</li>
-            <li>Sikre sporbarhet, overvåkning og kontroll på bruk</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="first-30-days">
-    <div class="container">
-      <h2 class="section-title">Hva jeg gjør de første 30 dagene</h2>
-      <p class="section-intro">
-        Jeg liker å starte med å forstå landskapet, etablere felles retning og få tidlig fram konkrete forbedringer som gir verdi.
-      </p>
-      <div class="grid-3">
-        <div class="card">
-          <h3>Forstå</h3>
-          <p>Kartlegger dagens plattform, arkitektur, utfordringer og avhengigheter sammen med team, drift og forretning.</p>
-        </div>
-        <div class="card">
-          <h3>Strukturere</h3>
-          <p>Identifiserer forbedringsområder innen governance, sikkerhet, standardisering og ansvar.</p>
-        </div>
-        <div class="card">
-          <h3>Forbedre</h3>
-          <p>Starter konkrete tiltak innen automatisering, struktur og beste praksis med fokus på verdi og gjennomførbarhet.</p>
-        </div>
-      </div>
-    </div>
-  </section>
 </body>
 </html>
